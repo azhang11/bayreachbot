@@ -60,4 +60,4 @@ async def lookup(ctx, member: discord.Member = None):
 
 
 
-client.run("NzM3MTAzMjM2MDg2ODkwNTg3.Xx4e4g.kgVRwzv1xuOtjgAU6hCucdd38hI")
+client.run("") #add your bot's unique tag
