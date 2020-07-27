@@ -58,11 +58,29 @@ class SQLDatabase (commands.Cog):
         c.execute(f"SELECT * FROM users WHERE name = {ctx.author.id}")
 
         if c.fetchone() is None:
-            await ctx.send(f"{ctx.author.mention} has no hours logged!")
+            if num.find('h') == -1:
+                minutes = (float(num[:-1]))/60
+                c.execute(f"INSERT INTO users VALUES ({ctx.author.id}, {minutes})")
+                await ctx.send(f"{ctx.author.mention} has successfully logged {num[:-1]} minutes.")
+            else:
+                hours = float(num[:-1])
+                c.execute(f"INSERT INTO users VALUES ({ctx.author.id}, {hours})")
+                await ctx.send(f"{ctx.author.mention} has successfully logged {hours} hours.")
         else:
-            c.execute(f"SELECT hours FROM users WHERE name = {ctx.author.id}")
-            cur_hours = functools.reduce(lambda sub, ele: sub * 10 + ele, c.fetchone())
-            await ctx.send(f"{ctx.author.mention} has {cur_hours} lifetime hours.")
+            if num.find('h') == -1:
+                minutes = (float(num[:-1]))/60
+                c.execute(f"SELECT hours FROM users WHERE name = {ctx.author.id}")
+                add_time = functools.reduce(lambda sub, ele: sub * 10 + ele, c.fetchone())
+                add_time += minutes
+                c.execute(f"UPDATE users SET hours = {add_time} WHERE name = {ctx.author.id}")
+                await ctx.send(f"{ctx.author.mention} has successfully logged {num[:-1]} minutes.")
+            else:
+                hours = float(num[:-1])
+                c.execute(f"SELECT hours FROM users WHERE name = {ctx.author.id}")
+                add_time = functools.reduce(lambda sub, ele: sub * 10 + ele, c.fetchone())
+                add_time += hours
+                c.execute(f"UPDATE users SET hours = {add_time} WHERE name = {ctx.author.id}")
+                await ctx.send(f"{ctx.author.mention} has successfully logged {hours} hours.")
 
         con.commit()
         con.close()
