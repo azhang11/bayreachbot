@@ -1,5 +1,6 @@
 # bayreachbot
 breadbot but for bayreach
+
 The bot is fully functional, just go over to discord's developer portal and create your own bot and copy and paste the bot's tag into the bottom of main.py
 You will need to have discord.py installed on your computer. 
 
