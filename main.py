@@ -11,7 +11,6 @@ import schedule
 import asyncio
 
 client = commands.Bot(command_prefix = '.')
-#client.load_extension("cogs.database")
 client.load_extension("cogs.sql")
 
 @client.event
