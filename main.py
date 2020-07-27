@@ -26,8 +26,8 @@ async def unload(ctx, extension):
     client.unload_extension(f"cogs.{extension}")
 
 @client.command()
-async def cap(ctx):
-    await ctx.send("https://www.youtube.com/watch?v=srnG8ztQLd0")
+async def info(ctx):
+    await ctx.send("Bayreach Bot is an accountability bot created by Andrew Zhang. Use .help for a full list of commands.")
 
 @client.command()
 async def ping(ctx):
